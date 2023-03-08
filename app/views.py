@@ -11,8 +11,8 @@ from flask import render_template, request, redirect, send_from_directory, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash
-from app.models import *
-from app.forms import *
+from app.models import User, Property
+from app.forms import PropertyForm
 
 
 ###
@@ -39,8 +39,7 @@ def about():
 # the user ID stored in the session
 @login_manager.user_loader
 def load_user(id):
-    # return db.session.execute(db.select(User).filter_by(id=id)).scalar()
-    pass
+    return db.session.execute(db.select(User).filter_by(id=id)).scalar()
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):
