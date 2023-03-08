@@ -5,8 +5,14 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 
-from app import app
-from flask import render_template, request, redirect, url_for
+import os
+from app import app, db, login_manager
+from flask import render_template, request, redirect, send_from_directory, url_for, flash, session, abort
+from flask_login import login_user, logout_user, current_user, login_required
+from werkzeug.utils import secure_filename
+from werkzeug.security import check_password_hash
+from app.models import *
+from app.forms import *
 
 
 ###
@@ -28,6 +34,13 @@ def about():
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+
+# user_loader callback. This callback is used to reload the user object from
+# the user ID stored in the session
+@login_manager.user_loader
+def load_user(id):
+    # return db.session.execute(db.select(User).filter_by(id=id)).scalar()
+    pass
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):
