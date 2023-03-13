@@ -1,0 +1,43 @@
+{% extends "base.html"%}
+
+{% block main %}
+
+<h1 class="page-header">Properties</h1>
+
+<div class="row">
+    <div class="column">
+    
+        <div class="card-group">
+        {% for property in properties %}
+            <div class="card">
+                <img class="card-img-top" src="{{ url_for('get_image', filename=property.photo) }}" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{ property.title }}</h5>
+                <p class="card-text list">
+                    <span class="location">
+                        <i class='fas fa-map-marker-alt' style='font-size:16px'></i>&nbsp;&nbsp;
+                        {{ property.location }}</span>
+                    <br> 
+                    <span class="price bg-success pill">{{ property.price | currency_format }}</span>
+                </p>
+                </div>
+                <a href="{{ url_for('details', propertyid=property.id) }}"><div class="card-footer bg-primary">
+                <button class="bg-primary">View Property</small>
+                </div></a>
+            </div>
+        {% endfor %}
+                
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col">
+            <div class="paginate">
+                <p> {{ pagination.links }} </p> {{ total }}
+                
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
