@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block main %}
+        <div class="card-details">
+            <div class="card" style="max-width: 800px; height:400px;">
+                <div class="row g-0">
+                    <div class="col-sm-5">
+                        <img src="{{ url_for('get_image', filename=property.photo) }}" class="card-img-top h-100" alt="...">
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="card-body" style="width:100%">
+                            <h5 class="card-title"> {{ property.title }}</h5>
+                            <p class="tags">
+                                <span class="property_price text-bg-primary pill bg-primary">{{ property.price | currency_format }}</span>
+                                <span class="property_details text-primary-warning pill bg-warning">{{ property.property_type | capitalize }}</span>
+                            </p>
+                            <p class="card-text detail-desc">{{ property.description | capitalize }}</p>
+                            <p class="features">
+                                <span><i class='fas fa-bed' style='font-size:16px'></i>&nbsp;&nbsp;{{ property.bedrooms }} {% if property.bedrooms == "1" %} bedroom {%else %} bedrooms {% endif %}</span>
+                                {% for i in range(6) %}&nbsp;{% endfor %}
+                                <span><i class='fas fa-bath' style='font-size:16px'></i>&nbsp;&nbsp;{{ property.bathrooms }} {% if property.bathroom == "1" %} bathroom {%else %} bathrooms {% endif %}</span>
+                            </p>
+                            <p class="location">
+                                <i class='fas fa-map-marker-alt' style='font-size:16px'></i>&nbsp;&nbsp;{{ property.location }}</p>
+                            <p class="btn btn-success">Email Realtor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{%endblock%}

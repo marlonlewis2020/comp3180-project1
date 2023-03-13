@@ -1,0 +1,111 @@
+{% extends "base.html"%}
+
+{% block main %}
+
+    <h1 class="page-header">Add Property</h1>
+
+        <form enctype="multipart/form-data" action="{{ url_for('add_property') }}" method="POST">
+            {{ property.csrf_token }}
+            <div class="form-group">
+
+                <div class="form-group">
+                    {{property.title.label}}
+                    {% if 'required' in property.title.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.title.name in errors %}
+                    {{ property.title(class="form-control input-field invalid") }}
+                    {% else %}
+                    {{ property.title(class="form-control input-field") }}
+                    {% endif %}
+
+                    {{property.description.label}}
+                    {% if 'required' in property.description.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.description.name in errors %}
+                    {{ property.description(class="form-control input-field invalid") }}
+                    {% else %}
+                    {{ property.description(class="form-control input-field") }}
+                    {% endif %}
+                </div>
+
+                <div class="half-size">
+                    <div>
+                    {{property.bedrooms.label}}
+                    {% if 'required' in property.bedrooms.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.bedrooms.name in errors %}
+                    {{ property.bedrooms(class="form-control  half-size input-field invalid") }}
+                    {% else %}
+                    {{ property.bedrooms(class="form-control  half-size input-field") }}
+                    {% endif %}
+                    </div>
+
+                    <div>{{property.bathrooms.label}}
+                    {% if 'required' in property.bathrooms.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.bathrooms.name in errors %}
+                    {{ property.bathrooms(class="form-control  half-size input-field invalid") }}
+                    {% else %}
+                    {{ property.bathrooms(class="form-control  half-size input-field") }}
+                    {% endif %}
+                    </div>
+
+                    <div>
+                    {{property.price.label}}
+                    {% if 'required' in property.price.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.price.name in errors %}
+                    {{ property.price(class="form-control  half-size input-field invalid") }}
+                    {% else %}
+                    {{ property.price(class="form-control  half-size input-field") }}
+                    {% endif %}
+                    </div>
+
+                    <div>
+                    {{property.property_type.label}}
+                    {% if 'required' in property.property_type.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {{ property.property_type(class="form-select half-size form-select-sm") }}
+                    </div>
+                </div>
+
+                <div class="half-size">
+                    <div>
+                    {{property.location.label}}
+                    {% if 'required' in property.location.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.location.name in errors %}
+                    {{ property.location(class="form-control  half-size input-field invalid") }}
+                    {% else %}
+                    {{ property.location(class="form-control  half-size input-field") }}
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="half-size">
+                    <div>
+                    {{property.photo.label}}
+                    {% if 'required' in property.photo.flags %}
+                        <span class="required"><small>*</small></span>
+                    {% endif %}
+                    {% if property.photo.name in errors %}
+                    {{ property.photo(class="form-control  small input-field invalid") }}
+                    {% else %}
+                    {{ property.photo(class="form-control  small input-field") }}
+                    {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            {# Add the file upload field as you learnt for Flask-WTF #}
+            
+            <button type="submit" name="submit" class="btn btn-primary">Add Property</button>
+        </form>
+
+{% endblock %}

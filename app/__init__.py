@@ -9,9 +9,6 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-with app.app_context():
-    db.create_all()
-
 # Flask-Login login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
